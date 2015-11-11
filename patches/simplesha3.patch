@@ -1,0 +1,32 @@
+--- a/simplesha3.c	2015-11-11 12:16:38.000000000 +0000
++++ b/simplesha3.c	2015-11-11 12:16:42.000000000 +0000
+@@ -1,7 +1,11 @@
+-/* Version 20150922. Public domain. */
++/* Version 20150922-post1. Public domain. */
+ 
+ #include "Python.h"
+ 
++#if PY_MAJOR_VERSION >= 3
++#define PyString_FromStringAndSize PyBytes_FromStringAndSize
++#endif
++
+ #define FOR(i,n) for (i = 0;i < n;++i)
+ #define H(i,r,p,d,name) \
+   static PyObject *i(PyObject *self,PyObject *args) \
+@@ -49,7 +53,16 @@
+   {0,0}
+ };
+ 
++#if PY_MAJOR_VERSION >= 3
++PyMODINIT_FUNC PyInit_simplesha3(void)
++{
++ static struct PyModuleDef moduledef = {
++   PyModuleDef_HEAD_INIT, "simplesha3", "simplesha3", -1, functions, };
++ PyModule_Create(&moduledef);
++}
++#else
+ PyMODINIT_FUNC initsimplesha3(void)
+ {
+   Py_InitModule("simplesha3",functions);
+ }
++#endif

@@ -1,0 +1,15 @@
+--- a/setup.py	2015-11-11 12:16:38.000000000 +0000
++++ b/setup.py	2015-11-11 12:16:42.000000000 +0000
+@@ -1,10 +1,10 @@
+ # -*- coding: utf-8 -*-
+ 
+-# Version 20150922. Public domain.
++# Version 20150922-post1. Public domain.
+ 
+ from distutils.core import setup, Extension
+ 
+ setup(name='simplesha3',
+-      version='20150922',
++      version='2015.09.22.post1',
+       description='Simple SHA-3 implementation',
+       ext_modules=[Extension('simplesha3',sources = ['simplesha3.c'])])
